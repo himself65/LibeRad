@@ -1,3 +1,3 @@
-# frontend-react-scaffold
+# LibeRad
 
-赛丝科技前端脚手架
+实验性项目
