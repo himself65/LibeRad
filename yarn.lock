@@ -11475,15 +11475,15 @@ react-dev-utils@^10.0.0:
     strip-ansi "5.2.0"
     text-table "0.2.0"
 
-react-dom@^16.12.0:
-  version "16.12.0"
-  resolved "https://registry.npm.taobao.org/react-dom/download/react-dom-16.12.0.tgz?cache=0&sync_timestamp=1576681307774&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-dom%2Fdownload%2Freact-dom-16.12.0.tgz#0da4b714b8d13c2038c9396b54a92baea633fe11"
-  integrity sha1-DaS3FLjRPCA4yTlrVKkrrqYz/hE=
+react-dom@^0.0.0-experimental-f42431abe:
+  version "0.0.0-experimental-f42431abe"
+  resolved "https://registry.npm.taobao.org/react-dom/download/react-dom-0.0.0-experimental-f42431abe.tgz?cache=0&sync_timestamp=1576681307774&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-dom%2Fdownload%2Freact-dom-0.0.0-experimental-f42431abe.tgz#d3fda43b88f0765a0031de237da1496818d2b58b"
+  integrity sha1-0/2kO4jwdloAMd4jfaFJaBjStYs=
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
-    scheduler "^0.18.0"
+    scheduler "0.0.0-experimental-f42431abe"
 
 react-error-overlay@^6.0.4:
   version "6.0.4"
@@ -11585,10 +11585,10 @@ react-test-renderer@^16.0.0-0, react-test-renderer@^16.9.0:
     react-is "^16.8.6"
     scheduler "^0.18.0"
 
-react@^16.12.0:
-  version "16.12.0"
-  resolved "https://registry.npm.taobao.org/react/download/react-16.12.0.tgz#0c0a9c6a142429e3614834d5a778e18aa78a0b83"
-  integrity sha1-DAqcahQkKeNhSDTVp3jhiqeKC4M=
+react@^0.0.0-experimental-f42431abe:
+  version "0.0.0-experimental-f42431abe"
+  resolved "https://registry.npm.taobao.org/react/download/react-0.0.0-experimental-f42431abe.tgz?cache=0&sync_timestamp=1576681306957&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact%2Fdownload%2Freact-0.0.0-experimental-f42431abe.tgz#bacc0acb4722a2a4c92e4a33cce76978005b3f76"
+  integrity sha1-uswKy0cioqTJLkozzOdpeABbP3Y=
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
@@ -12265,6 +12265,14 @@ scan-directory@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npm.taobao.org/scan-directory/download/scan-directory-2.0.0.tgz#99fcb923ca26b8e2541cc3afb34d50cf494ea65f"
   integrity sha1-mfy5I8omuOJUHMOvs01Qz0lOpl8=
+
+scheduler@0.0.0-experimental-f42431abe:
+  version "0.0.0-experimental-f42431abe"
+  resolved "https://registry.npm.taobao.org/scheduler/download/scheduler-0.0.0-experimental-f42431abe.tgz?cache=0&sync_timestamp=1576681268670&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fscheduler%2Fdownload%2Fscheduler-0.0.0-experimental-f42431abe.tgz#4ab6329853c94f4680c51b7484137668d81ac772"
+  integrity sha1-SrYymFPJT0aAxRt0hBN2aNgax3I=
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
 
 scheduler@^0.17.0:
   version "0.17.0"
@@ -13622,7 +13630,7 @@ typedarray@^0.0.6:
   resolved "https://registry.npm.taobao.org/typedarray/download/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@^3.7.2, typescript@^3.7.3:
+typescript@^3.7.3, typescript@^3.7.4:
   version "3.7.4"
   resolved "https://registry.npm.taobao.org/typescript/download/typescript-3.7.4.tgz#1743a5ec5fef6a1fa9f3e4708e33c81c73876c19"
   integrity sha1-F0Ol7F/vah+p8+RwjjPIHHOHbBk=
@@ -14129,9 +14137,9 @@ webpack-sources@^1.1.0, webpack-sources@^1.4.0, webpack-sources@^1.4.1:
     source-list-map "^2.0.0"
     source-map "~0.6.1"
 
-webpack@^4.41.2:
+webpack@^4.41.4:
   version "4.41.4"
-  resolved "https://registry.npm.taobao.org/webpack/download/webpack-4.41.4.tgz#4bec4125224bdf50efa8be6226c19047599cd034"
+  resolved "https://registry.npm.taobao.org/webpack/download/webpack-4.41.4.tgz?cache=0&sync_timestamp=1577173237180&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fwebpack%2Fdownload%2Fwebpack-4.41.4.tgz#4bec4125224bdf50efa8be6226c19047599cd034"
   integrity sha1-S+xBJSJL31DvqL5iJsGQR1mc0DQ=
   dependencies:
     "@webassemblyjs/ast" "1.8.5"
