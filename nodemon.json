@@ -7,10 +7,10 @@
     "test/*"
   ],
   "watch": [
-    "mock/*"
+    "mock/mock/*"
   ],
   "env": {
-    "NODE_ENV": "production"
+    "NODE_ENV": "development"
   },
   "delay": 2500
 }

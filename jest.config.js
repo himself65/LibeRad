@@ -9,7 +9,11 @@ module.exports = {
   setupFiles: [
     'react-app-polyfill/jsdom'
   ],
-  setupFilesAfterEnv: [],
+  globals: {
+    DEBUG: true,
+    MOCK: true
+  },
+  setupFilesAfterEnv: ['<rootDir>/config/setupTests.js'],
   testMatch: [
     '<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}',
     '<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}'
@@ -27,7 +31,14 @@ module.exports = {
   modulePaths: [],
   moduleNameMapper: {
     '^react-native$': 'react-native-web',
-    '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy'
+    '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
+    '^~type/(.*)': '<rootDir>/types/$1',
+    '^~api/(.*)': '<rootDir>/src/api/$1',
+    '^~component/(.*)': '<rootDir>/src/components/$1',
+    '^~store/(.*)': '<rootDir>/src/store/$1',
+    '^~style/(.*)': '<rootDir>/src/style/$1',
+    '^~util/(.*)': '<rootDir>/src/utils/$1',
+    '^~view/(.*)': '<rootDir>/src/views/$1'
   },
   moduleFileExtensions: [
     'web.js',
@@ -39,7 +50,8 @@ module.exports = {
     'json',
     'web.jsx',
     'jsx',
-    'node'
+    'node',
+    'd.ts'
   ],
   watchPlugins: [
     'jest-watch-typeahead/filename',
