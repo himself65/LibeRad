@@ -1,15 +1,11 @@
 const express = require('express')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
-const expressJwt = require('express-jwt')
-// const jwt = require('jsonwebtoken')
 
 const app = express()
-const secretKey = 'secretKey'
 
 app.use(morgan('combined'))
 app.use(bodyParser())
-app.use(expressJwt({ secret: secretKey }).unless({ path: ['/user/login', '/user/register'] }))
 
 app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
