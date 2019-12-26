@@ -1,6 +1,6 @@
-const express = require('express')
-const morgan = require('morgan')
-const bodyParser = require('body-parser')
+import express from 'express'
+import morgan from 'morgan'
+import bodyParser from 'body-parser'
 
 const app = express()
 
@@ -21,5 +21,5 @@ app.all('*', function (req, res, next) {
 })
 
 app.listen(3001, () => {
-  console.log(`listen at http://localhost:3001`)
+  console.log('listen at http://localhost:3001')
 })

@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "src"
+  },
+  "include": [
+    "../config",
+    "./",
+    "../mock",
+    "../scripts"
+  ],
+  "exclude": [
+    "../node_modules"
+  ]
+}
