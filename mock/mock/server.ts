@@ -1,6 +1,7 @@
 import express from 'express'
 import morgan from 'morgan'
 import bodyParser from 'body-parser'
+import { user1 } from './data/user'
 
 const app = express()
 
@@ -19,6 +20,11 @@ app.all('*', function (req, res, next) {
     next()
   }
 })
+
+app.get('/user', (req, res) => res
+  .json(user1)
+  .end()
+)
 
 app.listen(3001, () => {
   console.log('listen at http://localhost:3001')
