@@ -12,5 +12,6 @@
   "env": {
     "NODE_ENV": "development"
   },
+  "exec": "ts-node --project tsconfig.mock.json",
   "delay": 2500
 }

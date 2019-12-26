@@ -1,0 +1,25 @@
+{
+  "extends": "./tsconfig.json",
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "sourceMap": true,
+    "outDir": "./build",
+    "rootDir": "./mock",
+    "removeComments": true,
+    "noImplicitAny": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "docs",
+    "src"
+  ],
+  "include": [
+    "./mock/**/*.ts"
+  ]
+}
