@@ -4,7 +4,6 @@ const os = require('os')
 const isWsl = require('is-wsl')
 const { resolve } = require('path')
 const HappyPack = require('happypack')
-const { DefinePlugin } = require('webpack')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
@@ -16,8 +15,8 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin')
-const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin')
-const postcssNormalize = require('postcss-normalize')
+const WatchMissingNodeModulesPlugin = require(
+  'react-dev-utils/WatchMissingNodeModulesPlugin')
 
 const isProd = process.env.NODE_ENV === 'production'
 const extractCSS = isProd || process.env.TARGET === 'development'
@@ -27,24 +26,8 @@ const cssLoaders = [
   {
     loader: 'css-loader',
     options: {
-      sourceMap: !isProd
-    }
-  },
-  {
-    loader: 'postcss-loader',
-    options: {
-      ident: 'postcss',
-      plugins: () => [
-        require('postcss-flexbugs-fixes'),
-        require('postcss-preset-env')({
-          autoprefixer: {
-            flexbox: 'no-2009'
-          },
-          stage: 3
-        }),
-        postcssNormalize()
-      ],
-      sourceMap: !isProd
+      sourceMap: !isProd,
+      importLoaders: 1
     }
   }
 ]
@@ -54,6 +37,15 @@ const lessLoaders = [
     loader: 'less-loader',
     options: {
       javascriptEnabled: true
+    }
+  }
+]
+
+const sassLoaders = [
+  ...cssLoaders, {
+    loader: 'sass-loader',
+    options: {
+      sourceMap: !isProd
     }
   }
 ]
@@ -71,7 +63,14 @@ exports.config = {
   resolve: {
     extensions: ['*', '.js', '.json', '.ts', '.tsx'],
     alias: {
-      '@': resolve(__dirname, '..', 'src')
+      'react-dom': '@hot-loader/react-dom',
+      '~type': resolve(__dirname, '..', 'types'),
+      '~api': resolve(__dirname, '..', 'src', 'api'),
+      '~component': resolve(__dirname, '..', 'src', 'components'),
+      '~store': resolve(__dirname, '..', 'src', 'store'),
+      '~style': resolve(__dirname, '..', 'src', 'style'),
+      '~util': resolve(__dirname, '..', 'src', 'utils'),
+      '~view': resolve(__dirname, '..', 'src', 'views')
     }
   },
   node: {
@@ -95,12 +94,12 @@ exports.config = {
         }
       },
       {
-        test: /\.css$/,
-        use: cssLoaders
-      },
-      {
         test: /\.less$/,
         use: lessLoaders
+      },
+      {
+        test: /\.s[ac]ss$/,
+        use: sassLoaders
       }
     ]
   },
@@ -142,7 +141,8 @@ exports.config = {
     // tip: remove HotModuleReplacementPlugin from webpack.config.
     // because "--hot" option for webpack-dev-server is doing the same.
     !isProd && new CaseSensitivePathsPlugin(),
-    !isProd && new WatchMissingNodeModulesPlugin(resolve(__dirname, '..', 'node_modules')),
+    !isProd &&
+    new WatchMissingNodeModulesPlugin(resolve(__dirname, '..', 'node_modules')),
     isProd &&
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
@@ -171,28 +171,14 @@ exports.config = {
     // having to parse `index.html`.
     new ManifestPlugin({
       fileName: 'manifest.json',
-      publicPath: '/',
-      generate: (seed, files) => {
-        const manifestFiles = files.reduce(function (manifest, file) {
-          manifest[file.name] = file.path
-          return manifest
-        }, seed)
-
-        return {
-          ...require('../public/manifest'),
-          files: manifestFiles
-        }
-      }
+      publicPath: '/'
     }),
-    new CopyPlugin([{
-      from: resolve(__dirname, '..', 'public'),
-      to: resolve(__dirname, '..', 'dist'),
-      ignore: ['index.html', 'manifest.json']
-    }]),
-    // 添加全局变量
-    new DefinePlugin({
-      DEBUG: !isProd
-    })
+    new CopyPlugin([
+      {
+        from: resolve(__dirname, '..', 'public'),
+        to: resolve(__dirname, '..', 'dist'),
+        ignore: ['index.html', 'manifest.json']
+      }])
   ].filter(Boolean),
   performance: {
     hints: false

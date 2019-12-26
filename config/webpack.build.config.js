@@ -1,7 +1,14 @@
 const { resolve } = require('path')
+const { DefinePlugin } = require('webpack')
 const merge = require('webpack-merge')
 const HappyPack = require('happypack')
 const { config: baseWebpackConfig, happyThreadPool } = require('./webpack.base.config')
+
+const useMock = !!process.env.MOCK
+const openDEBUG = !!process.env.DEBUG
+
+console.log('useMock: ', useMock)
+console.log('openDEBUG: ', openDEBUG)
 
 module.exports = merge(baseWebpackConfig, {
   entry: {
@@ -30,12 +37,19 @@ module.exports = merge(baseWebpackConfig, {
       id: 'scripts',
       threadPool: happyThreadPool,
       loaders: [
+        'cache-loader',
         'babel-loader',
         {
           loader: 'ts-loader',
           options: { happyPackMode: true }
-        }
+        },
+        'eslint-loader?cache=true?emitWarning=true?emitError=true'
       ]
+    }),
+    new DefinePlugin({
+      DEBUG: openDEBUG,
+      MOCK: useMock
     })
-  ]
+  ],
+  devtool: openDEBUG ? 'source-map' : undefined
 })

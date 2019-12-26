@@ -1,6 +1,7 @@
 const { resolve } = require('path')
 
 const merge = require('webpack-merge')
+const { DefinePlugin } = require('webpack')
 const HappyPack = require('happypack')
 const { config: baseWebpackConfig, happyThreadPool } = require('./webpack.base.config')
 
@@ -20,7 +21,8 @@ module.exports = merge(baseWebpackConfig, {
     futureEmitAssets: true,
     chunkFilename: '[name].chunk.js',
     publicPath: '/',
-    devtoolModuleFilenameTemplate: info => resolve(info.absoluteResourcePath).replace(/\\/g, '/')
+    devtoolModuleFilenameTemplate: info => resolve(info.absoluteResourcePath)
+      .replace(/\\/g, '/')
   },
   module: {
     rules: [
@@ -36,20 +38,21 @@ module.exports = merge(baseWebpackConfig, {
       },
       {
         test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/,
-        use: [{
-          loader: 'url-loader',
-          options: {
-            limit: 10000,
-            name: 'img/[name].[hash:7].[ext]'
-          }
-        }]
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              name: 'img/[name].[hash:7].[ext]'
+            }
+          }]
       }
     ]
   },
   devServer: {
     contentBase: resolve(__dirname, '..', 'dist'),
     publicPath: '/',
-    host: process.env.HOST || 'localhost',
+    host: process.env.HOST || '0.0.0.0',
     port: process.env.PORT || '3000',
     historyApiFallback: true,
     disableHostCheck: true
@@ -59,15 +62,21 @@ module.exports = merge(baseWebpackConfig, {
       id: 'ts',
       threadPool: happyThreadPool,
       loaders: [
+        'cache-loader',
         'babel-loader',
-        { path: 'ts-loader', query: { happyPackMode: true } },
-        'eslint-loader?cache=true?emitWarning=true'
+        { loader: 'ts-loader', options: { happyPackMode: true } }
       ]
     }),
     new HappyPack({
       id: 'js',
       threadPool: happyThreadPool,
-      loaders: ['babel-loader', 'eslint-loader?cache=true?emitWarning=true']
+      loaders: [
+        'cache-loader',
+        'babel-loader'
+      ]
+    }),
+    new DefinePlugin({
+      DEBUG: true
     })
   ],
   resolve: {
