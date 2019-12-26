@@ -5,9 +5,6 @@ const { DefinePlugin } = require('webpack')
 const HappyPack = require('happypack')
 const { config: baseWebpackConfig, happyThreadPool } = require('./webpack.base.config')
 
-const isProd = process.env.NODE_ENV === 'production'
-const extractCSS = isProd || process.env.TARGET === 'development'
-
 module.exports = merge(baseWebpackConfig, {
   devtool: 'source-map',
   entry: [
@@ -62,7 +59,6 @@ module.exports = merge(baseWebpackConfig, {
       id: 'ts',
       threadPool: happyThreadPool,
       loaders: [
-        'cache-loader',
         'babel-loader',
         { loader: 'ts-loader', options: { happyPackMode: true } }
       ]
@@ -71,7 +67,6 @@ module.exports = merge(baseWebpackConfig, {
       id: 'js',
       threadPool: happyThreadPool,
       loaders: [
-        'cache-loader',
         'babel-loader'
       ]
     }),
