@@ -22,6 +22,7 @@ struct User {
     gender: Gender,
     links: Vec<Link>,
 }
+
 #[get("/user")]
 async fn index() -> impl Responder {
     HttpResponse::Ok().json(User {
