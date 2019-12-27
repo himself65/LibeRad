@@ -1,0 +1,7 @@
+{
+  "name": "liberad-mock",
+  "scripts": {
+    "build": "cargo build",
+    "start": "cargo run"
+  }
+}
