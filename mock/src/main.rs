@@ -1,32 +1,30 @@
 use actix_web::{web, App, middleware, HttpServer};
-use crate::schema::User;
+use crate::db::connect_redis;
+use crate::router::add_message;
 
 #[macro_use]
+extern crate log;
+#[macro_use]
 extern crate juniper;
+extern crate redis;
 
-mod schema;
+mod db;
 mod router;
+mod schema;
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
-    std::env::set_var("RUST_LOG", "actix_web=info");
+    println!("RUST_LOG: {}", std::env::var("RUST_LOG").unwrap());
     env_logger::init();
 
-    let client = mongodb::Client::with_uri_str("mongodb://root:123456@localhost:27017")
-        .expect("Failed to connect mongodb");
-    let db = client.database("liberad");
-
-    let schema = std::sync::Arc::new(schema::create_user_schema());
-
-    HttpServer::new(move ||
+    HttpServer::new(|| {
+        let redis_connection = connect_redis();
         App::new()
-            .data(schema.clone())
-            .data(std::sync::Arc::new(db.clone()))
+            .data(redis_connection)
             .wrap(middleware::Logger::default())
             .data(web::JsonConfig::default().limit(4096))
-            .service(router::user)
-            .service(router::index)
-    )
+            .service(add_message)
+    })
         .bind("127.0.0.1:3002")?
         .run()
         .await

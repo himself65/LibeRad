@@ -2,6 +2,11 @@
   "name": "liberad-mock",
   "scripts": {
     "build": "cargo build",
-    "start": "cargo run"
+    "start": "cross-env RUST_LOG=fiberad=debug cargo run"
+  },
+  "dependencies": {
+    "cross-env": "^6.0.3",
+    "express-graphql": "^0.9.0",
+    "graphql": "^14.5.8"
   }
 }
