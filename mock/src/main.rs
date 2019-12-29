@@ -1,6 +1,7 @@
 use actix_web::{web, App, middleware, HttpServer};
 use crate::db::connect_redis;
-use crate::router::add_message;
+use crate::router::{add_message, get_message};
+use redis::Commands;
 
 #[macro_use]
 extern crate log;
@@ -18,12 +19,14 @@ async fn main() -> std::io::Result<()> {
     env_logger::init();
 
     HttpServer::new(|| {
-        let redis_connection = connect_redis();
+        let redis_client = connect_redis();
+
         App::new()
-            .data(redis_connection)
+            .data(redis_client)
             .wrap(middleware::Logger::default())
             .data(web::JsonConfig::default().limit(4096))
             .service(add_message)
+            .service(get_message)
     })
         .bind("127.0.0.1:3002")?
         .run()
