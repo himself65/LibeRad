@@ -10,7 +10,8 @@
     "mock/mock/*"
   ],
   "env": {
-    "NODE_ENV": "development"
+    "NODE_ENV": "development",
+    "DEBUG": "liberad"
   },
   "exec": "ts-node --project tsconfig.mock.json",
   "delay": 2500

@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"yarn dev:app\" \"yarn dev:mock\"",
+    "dev": "concurrently \"yarn dev:app\" \"yarn dev:node\"",
     "dev:app": "cross-env NODE_ENV=development parcel index.html",
-    "dev:mock": "cross-env nodemon mock/mock/server.ts",
+    "dev:node": "cross-env nodemon mock/mock/server.ts",
     "test": "cross-env node scripts/test.js",
     "lint": "yarn lint:eslint && yarn lint:style",
     "lint:eslint": "eslint --ext .jsx,.js,.ts,.tsx src",
