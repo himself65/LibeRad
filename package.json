@@ -22,7 +22,7 @@
     "debug": "^4.1.1",
     "mobx": "^5.15.0",
     "mobx-react": "^6.1.4",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "numeral": "^2.0.6",
     "office-ui-fabric-react": "^7.70.0",
     "prop-types": "^15.7.2",
